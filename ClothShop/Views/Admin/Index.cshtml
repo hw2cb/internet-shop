@@ -1,0 +1,14 @@
+﻿
+@{
+    /**/
+    ViewBag.Title = "Index";
+}
+<!--главная админ страница с тремя кнопками-->
+@using (Html.BeginForm("LogOut", "Admin", FormMethod.Post))
+{
+    <input class="btn btn-success" type="submit" value="Выйти" />
+}
+<h2>Панель администратора</h2>
+<div class="btn btn-success">@Html.ActionLink("Редактировать товары", "../Admin/EditProductView")</div> <!--активная ссылка, перемещает на контроллер Admin, представление EditProductView (просмотр продуктов и ред кол-во)-->
+<div class="btn btn-success">@Html.ActionLink("Добавление товаров", "../Admin/AddProductForm")</div><!--активная ссылка, перемещает на контроллер Admin, представление AddProductForm (форма добавления продуктов в базу) -->
+<div class="btn btn-success">@Html.ActionLink("Просмотреть заказы", "../Order/OrderView")</div><!--активная ссылка, перемещает на контроллер Order, представление OrderView (просмотр заказов) -->

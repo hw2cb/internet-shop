@@ -1,0 +1,35 @@
+﻿@model ClothShop.Models.Product
+@{
+    ViewBag.Title = "Добавление нового продукта";
+}
+
+<h2>Добавление  новых товаров</h2>
+<!--Представление где находится форма для добавления товара в базу-->
+<div class="panel-body">
+    @using (Html.BeginForm("AddProduct", "Admin", FormMethod.Post))//говорим что при нажатии кнопки будет срабатывать метод AddProduct
+    {
+        @Html.ValidationSummary()
+        <div class="form-group">
+            <label>Имя товара: </label>
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" }) <!--обычный инпут тексбокс, здесь в модель добавляется значения полей-->
+        </div>
+        <div class="form-group">
+            <label>Цена товара: </label>
+            @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Количество: </label>
+            @Html.TextBoxFor(x => x.Quantity, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Описание товара: </label>
+            @Html.TextBoxFor(x => x.Description, new { @class = "form-control" })
+        </div>
+        <div class="text-center">
+
+            <input class="btn btn-success" type="submit" value="Добавить товар" /><!-- а по нажатию готовый обьект отправляется в наш метод в контроллере-->
+        </div>
+
+    }
+</div>
+

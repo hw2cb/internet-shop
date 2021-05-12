@@ -1,0 +1,9 @@
+﻿@model ClothShop.Models.Product
+
+@{
+    ViewBag.Title = "AddProduct";
+}
+<!--представление которое говорит админу, что товар добавлен и дает возможность вернуться к добавлению-->
+<h2>Продукт @Model.Name добавлен</h2>
+<div class="btn btn-success">@Html.ActionLink("Вернуться к добавлению товара", "../Admin/AddProductForm")</div>
+

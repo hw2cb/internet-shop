@@ -1,0 +1,30 @@
+﻿@model ClothShop.Models.Login
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Вход</h2>
+<!--Представление, логина.
+    Если спросит, как оно выводится, показываешь в AdminController что он у тебя помечен [Authorize]
+    Идешь в Web.config, там показываешь прописанный конфиг, где сказано запускать это представление
+    -->
+<div class="panel-body">
+    @using (Html.BeginForm("Login", "Admin", FormMethod.Post)) //говорим что по нажатию будет работать метод Login  в контроллере Admin
+    {
+        @Html.ValidationSummary()
+        <div class="form-group">
+            <label>Логин: </label>
+            @Html.TextBoxFor(x => x.LoginName, new { @class = "form-control" }) <!--инпут текстбокс где формируется модель Login-->
+        </div>
+        <div class="form-group">
+            <label>Пароль: </label>
+            @Html.TextBoxFor(x => x.Password, new { @class = "form-control" })
+        </div>
+        <div class="text-center">
+
+            <input class="btn btn-success" type="submit" value="Войти" />
+        </div>
+
+    }
+</div>

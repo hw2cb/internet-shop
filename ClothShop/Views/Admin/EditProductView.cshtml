@@ -1,0 +1,30 @@
+﻿@model IEnumerable<ClothShop.Models.Product>
+
+@{
+    ViewBag.Title = "Редактирование товаров";
+}
+
+<h2>Редактирование товаров</h2>
+<!--Представление показывает все товары и дает возможность отредактировать количество товара на складе-->
+@foreach (var p in Model)
+{
+    <div class="table-bordered m" style="margin-top:50px; margin-left:30px;">
+        <div>Имя товара: @p.Name</div>
+        <div>Цена: @p.Price</div>
+        <div>Описание:@p.Description</div>
+        <div>Количество на складе: @p.Quantity</div>
+
+        <!--вообще этот using(Html.BeginForm) это как тег <form> в html который отвечает за работу с сервером
+            можно было тупо написать <form здесь какой то код> здесь инпуты вместо Html.TextBox</form>
+            -->
+        @using (Html.BeginForm("ChangeProductQuant", "Admin", FormMethod.Post))//говорим что при нажатии кнопки в юзинге будет запускаться метод ChangeProductQuant
+        {
+            @Html.ValidationSummary()
+            @Html.Hidden("ProductID", p.ProductID)
+            @Html.TextBox("quantity", "")
+            <input class="btn btn-success" type="submit" value="Изменить количество товара" />
+        }
+        <form></form>
+    </div>
+
+}

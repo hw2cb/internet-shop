@@ -1,0 +1,32 @@
+﻿@model ClothShop.Models.Cart
+<!--модель класса Cart обьявлена сверху -->
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Корзина</h2>
+<div class="text-center" style="margin-bottom:100px; font-size:25px;">Общая сумма корзины: @Model.TotalPrice().ToString("C") <!--здесь у Cart вызывается метод общей цены корзины--></div>
+@foreach (var p in Model.Lines)//циклом проходим по листу элементов корзины, у модели вызываем Lines() он и возвращает лист
+{
+    <div class="table-bordered " style="margin-top:50px; margin-left:30px;">
+        <div>@p.Product.Name</div><!--у элемента корзины берем поле Product, у Product берем поле Name, так выводим имя продукта-->
+        <div>@p.Product.Price</div>
+        <div>@p.Product.Description</div>
+        <div>@p.Quantity</div>
+        @using (Html.BeginForm("RemoveFromCart", "Cart", FormMethod.Post))//говорим что кнопка будет обращаться к методу RemoveFromCart в контроллере Cart
+        {
+            @Html.ValidationSummary()
+            @Html.Hidden("ProductID", p.Product.ProductID) //невидимый инпут который передает id продукта
+            <input class="btn btn-success" type="submit" value="Удалить из корзины" />//собственно кнопка
+        }
+        @using (Html.BeginForm("ChangeItems", "Cart", FormMethod.Post))//говорим что кнопка будет обращаться к методу ChangeItems в контроллере Cart
+        {
+            @Html.ValidationSummary()
+            @Html.Hidden("ProductID", p.Product.ProductID)//невидимый инпут который передает id продукта
+            @Html.TextBox("quantity", "")//текстбокс в который будет писаться количество товара и передаваться в метод по нажатию
+            <input class="btn btn-success" type="submit" value="Изменить количество товара" />//собственно кнопка
+        }
+    </div>
+}
+<div class="btn btn-success">@Html.ActionLink("Оформить заказ", "../Order/OrderForm")</div><!--кнопка переводит на контроллер Order и на его представление OrderForm-->
+<div class="btn btn-success">@Html.ActionLink("Вернуться на главную", "../Product/Index")</div><!--кнопка переводит на контроллер Product и на его представление Index-->

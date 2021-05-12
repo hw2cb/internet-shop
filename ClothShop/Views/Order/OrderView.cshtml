@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ClothShop.Models.Order>
+@{
+    ViewBag.Title = "OrderView";
+}
+
+<h2>Все заказы:</h2>
+<!--представление с выводом всех заказов сделанных, админу-->
+@foreach (var z in Model) //циклом по листу заказов
+{
+
+<div class="table-bordered m" style="margin-top:50px; margin-left:30px;">
+    Заказ номер @z.OrderNum
+    <div>Имя:@z.Name</div>
+    <div>Фамилия:@z.Surname</div>
+    <div>Отчество:@z.Patronymic</div>
+    <div>Телефон:@z.Phone</div>
+    <div>Email:@z.Email</div>
+    @for (int i = 0; i < z.products.Count; i++) //а тут циклом перечисляем все продукты которые в этом заказе были сделаны
+    {
+    <div class="table-bordered m" style="margin-top:50px; margin-left:30px;">
+        <div>Имя продукта:@z.products[i].Product.Name</div> <!--у Order берем поле products, там циклом проходимся и у каждого берем поле Product, у которого в свою очередь Name-->
+        <div>Цена:@z.products[i].Product.Price</div>
+        <div>Описание:@z.products[i].Product.Description</div>
+        <div>Количество заказанного:@z.products[i].Quantity</div>
+    </div>
+
+    }
+    </div>
+
+}
+

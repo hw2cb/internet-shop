@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ClothShop.Models.Product>
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- 
+    Представление Index, вызывается в контроллере Product
+    Главная страница с продуктами
+    -->
+<h2 class="page-header text-center">Наши товары:</h2>
+<div class="btn btn-success" style="color:black">@Html.ActionLink("Корзина", "../Cart/Cart")</div>
+@foreach (var p in Model) //циклом по модели в которой лист продуктов
+{
+<div class="table-bordered m" style="margin-top:50px; margin-left:30px;">
+    <div>Имя товара: @p.Name</div>
+    <div>Цена: @p.Price</div>
+    <div>Описание:@p.Description</div>
+    <div>Количество на складе: @p.Quantity</div>
+    @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+    {
+        @Html.Hidden("ProductID", p.ProductID) //это невидимый инпут который передает методу AddToCart id продукта
+        <input class="btn btn-success" type="submit" value="Добавить в корзину" />
+    }
+</div>
+
+}
+

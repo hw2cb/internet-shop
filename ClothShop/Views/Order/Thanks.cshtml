@@ -1,0 +1,11 @@
+﻿@model ClothShop.Models.Order
+
+@{
+    ViewBag.Title = "Thanks";
+}
+<!--представление с благодарностью за сделанный заказ-->
+<div>
+    <h1>Спасибо за заказ, @Model.Name!</h1>
+    <div class="btn btn-success">@Html.ActionLink("Вернуться на главную", "../Product/Index")</div>
+</div>
+
